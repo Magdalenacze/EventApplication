@@ -2,7 +2,7 @@ package com.example.eventapplication.notification.service;
 
 import com.example.eventapplication.event.entity.EventEntity;
 
-public interface EventCreatedInAGivenCityEventListener {
+public interface EventCreatedEventListener {
 
-    void notifyEventCreatedInAGivenCity(EventEntity eventEntity);
+    void notifyEventCreated(EventEntity eventEntity);
 }

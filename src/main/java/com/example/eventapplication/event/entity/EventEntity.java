@@ -1,7 +1,6 @@
 package com.example.eventapplication.event.entity;
 
 import com.example.eventapplication.event.exception.EventException;
-import com.example.eventapplication.notification.entity.NotificationEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,7 +10,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -29,10 +27,6 @@ public class EventEntity {
     private String city;
     private Timestamp eventDate;
     private String eventName;
-
-//    @OneToMany
-//    @JoinColumn(name = "event_id")
-//    private List<NotificationEntity> notificationEntityListForEvent;
 
     public EventEntity(String city, String eventDate, String eventName) {
         this.eventDate = formatDate(eventDate);
@@ -74,8 +68,4 @@ public class EventEntity {
         this.eventDate = updatedEventEntity.getEventDate();
         this.eventName = updatedEventEntity.getEventName();
     }
-
-//    public void completeTheNotificationListForEvent(List<NotificationEntity> notificationEntities) {
-//        this.notificationEntityListForEvent.addAll(notificationEntities);
-//    }
 }

@@ -1,5 +1,6 @@
 package com.example.eventapplication.user.controller;
 
+import com.example.eventapplication.notification.dto.NotificationDto;
 import com.example.eventapplication.user.dto.UserDto;
 import com.example.eventapplication.user.service.UserService;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class UserController {
 
     @GetMapping("{technicalUserId}/notifications")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserDto> getAllNotificationsForUser(@PathVariable("technicalUserId") UUID technicalUserId) {
-        return userService.getAllNotificationsForUser();
+    public List<NotificationDto> getAllNotificationsForUser(@PathVariable("technicalUserId") UUID technicalUserId) {
+        return userService.getAllNotificationsForUser(technicalUserId);
     }
 }

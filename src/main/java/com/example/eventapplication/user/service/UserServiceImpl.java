@@ -1,5 +1,6 @@
 package com.example.eventapplication.user.service;
 
+import com.example.eventapplication.notification.dto.NotificationDto;
 import com.example.eventapplication.notification.entity.NotificationEntity;
 import com.example.eventapplication.user.dto.UserDto;
 import com.example.eventapplication.user.entity.UserEntity;
@@ -8,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -25,13 +27,10 @@ public class UserServiceImpl implements UserService, UserReadService, UserUpdate
     }
 
     @Override
-    public List<UserDto> getAllNotificationsForUser() {
-        return userRepository.findAll()
+    public List<NotificationDto> getAllNotificationsForUser(UUID technicalUserId) {
+        return userRepository.findUserByTechnicalUserId(technicalUserId).get().getNotificationEntityListForUser()
                 .stream()
-                .map(e -> new UserDto(
-                        e.getUserName(),
-                        e.getCity(),
-                        e.getEmail()))
+                .map(e -> new NotificationDto(e.getNotificationContent()))
                 .toList();
     }
 

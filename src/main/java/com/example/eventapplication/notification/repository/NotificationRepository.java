@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository
 public interface NotificationRepository extends JpaRepository<NotificationEntity, UUID> {
 
-    Optional<NotificationEntity> findByTechnicalUserIdAndTechnicalEventId(UUID technicalUserId, UUID technicalEventId);
+    Optional<NotificationEntity> findByTechnicalUserIdAndTechnicalEventId(UUID technicalEventId, UUID technicalUserId);
 
     List<NotificationEntity> findAllByTechnicalEventId(UUID technicalEventId);
 

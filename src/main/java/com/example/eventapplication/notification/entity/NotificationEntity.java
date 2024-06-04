@@ -20,10 +20,12 @@ public class NotificationEntity {
     private UUID technicalNotificationId;
     private UUID technicalEventId;
     private UUID technicalUserId;
+    private String notificationContent;
 
-    public NotificationEntity(UUID technicalEventId, UUID technicalUserId) {
+    public NotificationEntity(UUID technicalEventId, UUID technicalUserId, String notificationContent) {
         this.technicalNotificationId = UUID.randomUUID();
         this.technicalEventId = technicalEventId;
         this.technicalUserId = technicalUserId;
+        this.notificationContent = notificationContent;
     }
 }

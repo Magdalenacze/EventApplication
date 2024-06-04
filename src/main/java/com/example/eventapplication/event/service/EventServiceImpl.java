@@ -4,8 +4,7 @@ import com.example.eventapplication.event.dto.EventDto;
 import com.example.eventapplication.event.entity.EventEntity;
 import com.example.eventapplication.event.exception.EventServiceException;
 import com.example.eventapplication.event.repository.EventRepository;
-import com.example.eventapplication.notification.entity.NotificationEntity;
-import com.example.eventapplication.notification.service.EventCreatedInAGivenCityEventListener;
+import com.example.eventapplication.notification.service.EventCreatedEventListener;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ import java.util.UUID;
 public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
-    private final EventCreatedInAGivenCityEventListener eventCreatedInAGivenCityEventListener;
+    private final EventCreatedEventListener eventCreatedEventListener;
 
     @Override
     @Transactional
@@ -29,7 +28,7 @@ public class EventServiceImpl implements EventService {
                 eventDto.getEventDate(),
                 eventDto.getEventName());
         eventRepository.save(eventEntity);
-        eventCreatedInAGivenCityEventListener.notifyEventCreatedInAGivenCity(eventEntity);
+        eventCreatedEventListener.notifyEventCreated(eventEntity);
     }
 
     @Override
