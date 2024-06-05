@@ -38,8 +38,7 @@ public class NotificationServiceImpl implements NotificationService, EventCreate
                 .stream()
                 .forEach(e -> userUpdateService.updateNotificationsForUser(
                         notificationRepository.findByTechnicalUserIdAndTechnicalEventId(
-                                e.getTechnicalUserId(),
-                                eventEntity.getTechnicalEventId()).get(), e));
+                                e.getTechnicalUserId(), eventEntity.getTechnicalEventId()).get(), e));
     }
 
     @Override

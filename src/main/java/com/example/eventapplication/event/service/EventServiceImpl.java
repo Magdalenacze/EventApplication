@@ -72,11 +72,6 @@ public class EventServiceImpl implements EventService {
                 eventDto.getCity(),
                 eventDto.getEventDate(),
                 eventDto.getEventName()));
-        eventRepository.save(eventEntity.get());
+        //eventRepository.save(eventEntity.get());
     }
-
-//    @Override
-//    public void updateNotificationsForEvent(List<NotificationEntity> notificationEntity, EventEntity eventEntity) {
-//        eventEntity.completeTheNotificationListForEvent(notificationEntity);
-//    }
 }

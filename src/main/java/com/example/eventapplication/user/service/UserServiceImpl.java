@@ -4,11 +4,13 @@ import com.example.eventapplication.notification.dto.NotificationDto;
 import com.example.eventapplication.notification.entity.NotificationEntity;
 import com.example.eventapplication.user.dto.UserDto;
 import com.example.eventapplication.user.entity.UserEntity;
+import com.example.eventapplication.user.exception.UserServiceException;
 import com.example.eventapplication.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -28,7 +30,10 @@ public class UserServiceImpl implements UserService, UserReadService, UserUpdate
 
     @Override
     public List<NotificationDto> getAllNotificationsForUser(UUID technicalUserId) {
-        return userRepository.findUserByTechnicalUserId(technicalUserId).get().getNotificationEntityListForUser()
+        Optional<UserEntity> userEntity = userRepository.findUserByTechnicalUserId(technicalUserId);
+        userEntity.orElseThrow(() -> new UserServiceException("Notifications cannot be displayed " +
+                "because the specified user does not exist!"));
+        return userEntity.get().getNotificationEntityListForUser()
                 .stream()
                 .map(e -> new NotificationDto(e.getNotificationContent()))
                 .toList();
@@ -36,7 +41,7 @@ public class UserServiceImpl implements UserService, UserReadService, UserUpdate
 
     @Override
     public List<UserEntity> getUserByCity(String city) {
-        return userRepository.getAllUserEntityByCity(city);
+        return userRepository.findAllUserByCity(city);
     }
 
     @Override

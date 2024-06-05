@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -25,7 +26,7 @@ public class UserEntity {
     private String city;
     private String email;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private List<NotificationEntity> notificationEntityListForUser;
 
@@ -34,6 +35,7 @@ public class UserEntity {
         this.userName = userName;
         this.city = city;
         this.email = email;
+        this.notificationEntityListForUser = new ArrayList<>();
     }
 
     @Override
@@ -42,13 +44,12 @@ public class UserEntity {
         if (!(o instanceof UserEntity that)) return false;
         return Objects.equals(userName, that.userName) &&
                 Objects.equals(city, that.city) &&
-                Objects.equals(email, that.email) &&
-                Objects.equals(notificationEntityListForUser, that.notificationEntityListForUser);
+                Objects.equals(email, that.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName, city, email, notificationEntityListForUser);
+        return Objects.hash(userName, city, email);
     }
 
     public void completeTheNotificationListForUser(NotificationEntity notificationEntity) {
