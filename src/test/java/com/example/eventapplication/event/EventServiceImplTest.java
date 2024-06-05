@@ -52,8 +52,8 @@ public class EventServiceImplTest {
         //then
         List<EventEntity> all = eventRepository.findAll();
         assertThat(all).hasSize(1);
-        EventEntity EventEntity = all.get(0);
-        assertThat(EventEntity).isEqualTo(referenceEntity);
+        EventEntity eventEntity = all.get(0);
+        assertThat(eventEntity).isEqualTo(referenceEntity);
     }
 
     @Test

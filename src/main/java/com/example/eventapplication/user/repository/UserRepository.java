@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
-    List<UserEntity> getAllUserEntityByCity(String city);
+    List<UserEntity> findAllUserByCity(String city);
 
     Optional<UserEntity> findUserByTechnicalUserId(UUID technicalUserId);
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -22,16 +23,16 @@ public class EventController {
         eventService.createEvent(eventDto);
     }
 
+//    @GetMapping
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<EventDto> getAllEvents() {
+//        return eventService.getAllEvents();
+//    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<EventDto> getAllEvents(@RequestParam(required = false) EventDto eventDto) {
-        return eventService.getAllEvents();
-    }
-
-    @GetMapping("/")
-    @ResponseStatus(HttpStatus.OK)
-    public List<EventDto> getAllEventsByCity(@RequestParam String city) {
-        return eventService.getAllEventsByCity(city);
+    public List<EventDto> getAllEvents(@RequestParam(required = false) Optional<String> city) {
+        return city.map(eventService::getAllEventsByCity).orElse(eventService.getAllEvents());
     }
 
     @DeleteMapping("{technicalEventId}")

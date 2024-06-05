@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -27,5 +28,17 @@ public class NotificationEntity {
         this.technicalEventId = technicalEventId;
         this.technicalUserId = technicalUserId;
         this.notificationContent = notificationContent;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NotificationEntity that)) return false;
+        return Objects.equals(notificationContent, that.notificationContent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(notificationContent);
     }
 }
